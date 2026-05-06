@@ -32,6 +32,11 @@ COPY --chown=appuser:appuser pyproject.toml ./pyproject.toml
 RUN uv venv --python 3.10 && \
     uv sync --extra cpu --no-cache
 
+# ================================================
+# FIX JAPONÊS - Baixa o dicionário UniDic (obrigatório)
+# ================================================
+RUN python -m unidic download
+
 # Copy project files including models
 COPY --chown=appuser:appuser api ./api
 COPY --chown=appuser:appuser web ./web
